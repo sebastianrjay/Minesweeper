@@ -3,8 +3,8 @@
 
   if (typeof MineSweeper === "undefined") {
 
-    window.MineSweeper = function(){
-      board = new MineSweeper.Board(10, 20);
+    window.MineSweeper = function(boardSize, numberOfMines){
+      board = new MineSweeper.Board(boardSize, numberOfMines);
     };
   }
 
