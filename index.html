@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css"></link>
+    <script type="text/javascript" src = "MyPromise.js"></script>
+    <script type="text/javascript" src="jQueryLite.js"></script>
+    <script type="text/javascript" src="minesweeper.js"></script>
+  </head>
+  <body>
+    <div class="description">
+      <center><h1>Minesweeper</h1></center>
+      <p>Welcome to Minesweeper. Click on a square to reveal it, and some of its
+        non-mined neighbors. If there is a number on the square, the number
+        reveals the number of its immediately adjacent neighbors that are mined.
+        To win, reveal all squares without ever clicking on a mined square.
+    </div>
+    <div class="board clearfix">
+    </div>
+  </body>
+  <script>
+    var g = MineSweeper();
+  </script>
+</html>
