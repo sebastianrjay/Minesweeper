@@ -42,10 +42,24 @@
     });
   };
 
+  MineSweeper.Board.prototype.revealAllTiles = function() {
+    for(var i = 0; i < this.size; i++) {
+      for(var j = 0; j < this.size; j++) {
+        if(!this.tiles[i][j].flipped) {
+          if(!this.tiles[i][j].bomb) {
+            this.tiles[i][j].flipTile();
+          } else {
+            this.tiles[i][j].flipMinedTile();
+          }
+        }
+      }
+    }
+  };
+
   MineSweeper.Board.prototype.inBounds = function(pos) {
     return pos[0] >= 0 && pos[1] >= 0 && pos[0] < this.size
       && pos[1] < this.size;
-  }
+  };
 
   MineSweeper.Tile = function(pos, board){
     this.flipped = false;
@@ -100,12 +114,20 @@
     tile.flipTile();
   };
 
+  MineSweeper.Tile.prototype.flipMinedTile = function() {
+    $l(this.inside).addClass('flipped');
+    $l(this.inside).addClass('mined');
+    $l("div[x = '" + this.x.toString() + "'] + div[y = '" + this.y.toString()
+      + "'] .back").html("<h2>*</h2");
+  };
+
   MineSweeper.Tile.prototype.flipTile = function() {
     if(!this.flipped){
       this.flipped = true;
       var count = this.neighborBombCount();
       if(this.bomb){
-        MineSweeper.gameOver();
+        this.flipMinedTile();
+        this.board.revealAllTiles();
       } else if(count > 0){
         $l(this.inside).addClass('flipped');
         $l(this.inside).addClass('orange');

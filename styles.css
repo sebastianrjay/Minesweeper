@@ -60,9 +60,19 @@
   background-color: orange;
 }
 
+.tile.flipped.mined .back {
+  background-color: red;
+}
+
 .tile.flipped.orange .back > h2 {
   position: relative;
   top: -8px;
+  left: 19px;
+}
+
+.tile.flipped.mined .back > h2 {
+  position: relative;
+  top: -6px;
   left: 19px;
 }
 
