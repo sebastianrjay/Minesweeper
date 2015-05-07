@@ -26,120 +26,10 @@
     };
   }
 
-  DOMNodeCollection.prototype.html = function(string) {
-    if(arguments.length === 1) {
-      this.elements.forEach(function(element) {
-        element.innerHTML = string;
-      });
-    } else {
-      return this.elements[0].innerHTML;
-    }
-  }
-
-  DOMNodeCollection.prototype.empty = function() {
-    this.elements.forEach(function(element) {
-      element.innerHTML = "";
-    });
-  }
-
-  DOMNodeCollection.prototype.attr = function(name, value) {
-    if(arguments.length > 1) {
-      if(value instanceof Function){
-        this.elements.forEach(function(element) {
-          element.setAttribute(name, value());
-        })
-      } else {
-        this.elements.forEach(function(element) {
-          element.setAttribute(name, value);
-        })
-      }
-    } else {
-      return this.elements[0].getAttribute(name);
-    }
-  }
-
   DOMNodeCollection.prototype.addClass = function(className) {
     this.elements.forEach(function(element) {
       element.classList.add(className);
     });
-  }
-
-  DOMNodeCollection.prototype.removeClass = function(className) {
-    this.elements.forEach(function(element) {
-      element.classList.remove(className);
-    });
-  }
-
-  DOMNodeCollection.prototype.text = function(string) {
-    var text = document.createTextNode(string);
-    this.elements.forEach(function(element) {
-      element.appendChild(text);
-    });
-  }
-
-  DOMNodeCollection.prototype.toggleClass = function(className) {
-    this.elements.forEach(function(element) {
-      element.classList.toggle(className);
-    });
-  }
-
-  DOMNodeCollection.prototype.appendChild = function(htmlElement) {
-    this.elements.forEach(function(element) {
-      element.appendChild(htmlElement);
-    });
-  }
-
-  DOMNodeCollection.prototype.children = function() {
-    var childrens = [];
-    this.elements.forEach(function(element) {
-      childrens.concat([].slice.call(element.children));
-    });
-    return new DOMNodeCollection(childrens);
-  }
-
-  DOMNodeCollection.prototype.parents = function() {
-    var parentses = [];
-    this.elements.forEach(function(element) {
-      parentses.concat([].slice.call(element.parentNode));
-    });
-    return new DOMNodeCollection(parentses);
-  }
-
-  DOMNodeCollection.prototype.find = function(selector) {
-    var items = [];
-    this.elements.forEach(function(element) {
-      items.concat([].slice.call(element.querySelectorAll(selector)));
-    });
-    return new DOMNodeCollection(items);
-  }
-
-  DOMNodeCollection.prototype.remove = function() {
-    this.elements.forEach(function(element) {
-      element.remove();
-    });
-  }
-
-  DOMNodeCollection.prototype.on = function(type, func) {
-    this.elements.forEach(function(element) {
-      element.addEventListener(type, func);
-    });
-  }
-
-  DOMNodeCollection.prototype.off = function(type, func) {
-    this.elements.forEach(function(element) {
-      element.removeEventListener(type, func);
-    });
-  }
-
-  DOMNodeCollection.prototype.extend = function() {
-    var objects = [].slice.call(arguments, 0);
-    newObj = {};
-    objects.forEach(function(object) {
-      for(key in object) {
-        newObj.key = object.key;
-      }
-    });
-    return newObj;
   }
 
   DOMNodeCollection.prototype.ajax = function(options){
@@ -168,6 +58,116 @@
        }
        xmlhttp.open(options.method, options.url, options.async)
        xmlhttp.send();
+    });
+  }
+
+  DOMNodeCollection.prototype.appendChild = function(htmlElement) {
+    this.elements.forEach(function(element) {
+      element.appendChild(htmlElement);
+    });
+  }
+
+  DOMNodeCollection.prototype.attr = function(name, value) {
+    if(arguments.length > 1) {
+      if(value instanceof Function){
+        this.elements.forEach(function(element) {
+          element.setAttribute(name, value());
+        })
+      } else {
+        this.elements.forEach(function(element) {
+          element.setAttribute(name, value);
+        })
+      }
+    } else {
+      return this.elements[0].getAttribute(name);
+    }
+  }
+
+  DOMNodeCollection.prototype.children = function() {
+    var childrens = [];
+    this.elements.forEach(function(element) {
+      childrens.concat([].slice.call(element.children));
+    });
+    return new DOMNodeCollection(childrens);
+  }
+
+  DOMNodeCollection.prototype.empty = function() {
+    this.elements.forEach(function(element) {
+      element.innerHTML = "";
+    });
+  }
+
+  DOMNodeCollection.prototype.extend = function() {
+    var objects = [].slice.call(arguments, 0);
+    newObj = {};
+    objects.forEach(function(object) {
+      for(key in object) {
+        newObj.key = object.key;
+      }
+    });
+    return newObj;
+  }
+
+  DOMNodeCollection.prototype.find = function(selector) {
+    var items = [];
+    this.elements.forEach(function(element) {
+      items.concat([].slice.call(element.querySelectorAll(selector)));
+    });
+    return new DOMNodeCollection(items);
+  }
+
+  DOMNodeCollection.prototype.html = function(string) {
+    if(arguments.length === 1) {
+      this.elements.forEach(function(element) {
+        element.innerHTML = string;
+      });
+    } else {
+      return this.elements[0].innerHTML;
+    }
+  }
+
+  DOMNodeCollection.prototype.off = function(type, func) {
+    this.elements.forEach(function(element) {
+      element.removeEventListener(type, func);
+    });
+  }
+
+  DOMNodeCollection.prototype.on = function(type, func) {
+    this.elements.forEach(function(element) {
+      element.addEventListener(type, func);
+    });
+  }
+
+  DOMNodeCollection.prototype.parents = function() {
+    var parentses = [];
+    this.elements.forEach(function(element) {
+      parentses.concat([].slice.call(element.parentNode));
+    });
+    return new DOMNodeCollection(parentses);
+  }
+
+  DOMNodeCollection.prototype.remove = function() {
+    this.elements.forEach(function(element) {
+      element.remove();
+    });
+  }
+
+  DOMNodeCollection.prototype.removeClass = function(className) {
+    this.elements.forEach(function(element) {
+      element.classList.remove(className);
+    });
+  }
+
+  DOMNodeCollection.prototype.text = function(string) {
+    var text = document.createTextNode(string);
+    this.elements.forEach(function(element) {
+      element.appendChild(text);
+    });
+  }
+
+  DOMNodeCollection.prototype.toggleClass = function(className) {
+    this.elements.forEach(function(element) {
+      element.classList.toggle(className);
     });
   }
 })();
