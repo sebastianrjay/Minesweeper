@@ -54,6 +54,7 @@
 
 .tile.flipped{
   transform: rotateY(180deg) translate(-50px);
+  cursor: default;
 }
 
 .tile.flipped.orange .back {
