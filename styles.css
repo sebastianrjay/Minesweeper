@@ -65,7 +65,7 @@
 }
 
 .tile.flipped.yellow .back {
-  background-color: yellow;
+  background-color: #FFDF00;
 }
 
 .tile.flipped.mined .back {
