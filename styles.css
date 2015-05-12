@@ -1,3 +1,9 @@
+.description > p {
+  position: relative;
+  margin-left: 25px;
+  margin-right: 15px;
+}
+
 .board{
   perspective: 1000;
   position: relative;
@@ -49,11 +55,6 @@
   transform: rotateY(180deg);
 }
 
-.tile.flipped{
-  transform: rotateY(180deg) translate(-50px);
-  cursor: default;
-}
-
 .tile.orange .front {
   background-color: orange;
 }
@@ -62,6 +63,11 @@
   position: relative;
   top: -10px;
   left: 19px;
+}
+
+.tile.flipped{
+  transform: rotateY(180deg) translate(-50px);
+  cursor: default;
 }
 
 .tile.flipped.yellow .back {
@@ -82,10 +88,4 @@
   position: relative;
   top: -6px;
   left: 19px;
-}
-
-.description > p {
-  position: relative;
-  margin-left: 25px;
-  margin-right: 15px;
 }
