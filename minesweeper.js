@@ -8,7 +8,7 @@
     };
   }
 
-  MineSweeper.Board = function(size, mineds){
+  MineSweeper.Board = function(size, numMines){
     var minedTiles = 0;
     this.tiles = [];
     this.size = size;
@@ -21,7 +21,7 @@
       }
     }
 
-    while(minedTiles < mineds){
+    while(minedTiles < numMines){
       var xTry = Math.floor( Math.random() * size),
           yTry = Math.floor( Math.random() * size);
       if(this.tiles[xTry][yTry].mined === false){
@@ -62,6 +62,8 @@
   };
 
   MineSweeper.Tile = function(pos, board){
+    this.inside = document.createElement('div');
+    this.flagged = false;
     this.flipped = false;
     this.board = board;
     this.pos = pos;
@@ -85,11 +87,32 @@
     tile.flipTile();
   };
 
+  MineSweeper.Tile.prototype.flagTile = function(e) {
+    if(e) {
+      e.preventDefault();
+    }
+    if(this instanceof HTMLElement){
+      var tile = board.tiles[$l(this).attr("x")][$l(this).attr("y")];
+    } else {
+      var tile = this;
+    }
+
+    if(!tile.flagged) {
+      $l(tile.inside).addClass('orange');
+      $l("div[x = '" + tile.x + "'][y = '"
+        + tile.y + "'] .front").html("<h2>x</h2>");
+    } else {
+      $l(tile.inside).removeClass('orange');
+      $l("div[x = '" + tile.x + "'][y = '"
+        + tile.y + "'] .front").html("");
+    }
+  };
+
   MineSweeper.Tile.prototype.flipMinedTile = function() {
-    $l(this.inside).addClass('flipped');
     $l(this.inside).addClass('mined');
-    $l("div[x = '" + this.x.toString() + "'] + div[y = '" + this.y.toString()
-      + "'] .back").html("<h2>*</h2");
+    $l(this.inside).addClass('flipped');
+    $l("div[x = '" + this.x + "'][y = '"
+      + this.y + "'] .back").html("<h2>*</h2");
   };
 
   MineSweeper.Tile.prototype.flipNeighbors = function(){
@@ -106,17 +129,19 @@
   };
 
   MineSweeper.Tile.prototype.flipTile = function() {
-    if(!this.flipped){
+
+    if(!this.flipped) {
       this.flipped = true;
       var count = this.neighborminedCount();
+
       if(this.mined){
         this.flipMinedTile();
         this.board.revealAllTiles();
       } else if(count > 0){
         $l(this.inside).addClass('flipped');
-        $l(this.inside).addClass('orange');
-        $l("div[x = '" + this.x.toString() + "'] + div[y = '" + this.y.toString()
-          + "'] .back").html("<h2>" + count.toString() + "</h2");
+        $l(this.inside).addClass('yellow');
+        $l("div[x = '" + this.x + "'][y = '" + this.y
+          + "'] .back").html("<h2>" + count + "</h2>");
       } else {
         $l(this.inside).addClass('flipped');
         this.flipNeighbors();
@@ -141,7 +166,6 @@
   };
 
   MineSweeper.Tile.prototype.render = function(){
-    this.inside = document.createElement('div');
     var el = $l(this.inside);
     el.html("<div class='front'></div><div class='back'></div>");
     el.addClass('tile');
@@ -149,7 +173,8 @@
     el.attr("y", this.pos[1]);
     this.inside.style.top = this.top * 2;
     this.inside.style.left = this.left * 2;
-    el.on("click", this.clickTile);
+    el.on('click', this.clickTile);
+    el.on('contextmenu', this.flagTile);
     return this.inside;
   };
 })();

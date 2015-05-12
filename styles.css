@@ -3,6 +3,7 @@
   position: relative;
   top: 10%;
   left: 18%;
+  height: 815px;
   margin-bottom: 100px;
 }
 
@@ -39,10 +40,6 @@
   transform: rotateY(0deg);
 }
 
-.front.flagged{
-  background-color: green;
-}
-
 .front:hover{
   background-color: blue;
 }
@@ -57,15 +54,25 @@
   cursor: default;
 }
 
-.tile.flipped.orange .back {
+.tile.orange .front {
   background-color: orange;
+}
+
+.tile.orange .front > h2 {
+  position: relative;
+  top: -10px;
+  left: 19px;
+}
+
+.tile.flipped.yellow .back {
+  background-color: yellow;
 }
 
 .tile.flipped.mined .back {
   background-color: red;
 }
 
-.tile.flipped.orange .back > h2 {
+.tile.flipped.yellow .back > h2 {
   position: relative;
   top: -8px;
   left: 19px;
