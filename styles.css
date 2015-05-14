@@ -10,7 +10,15 @@
   top: 10%;
   left: 18%;
   height: 815px;
+  width: 815px;
   margin-bottom: 100px;
+}
+
+.board > h2 {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  font-size: 50px;
 }
 
 .clearfix:after {

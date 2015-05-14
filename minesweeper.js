@@ -38,6 +38,19 @@
       && pos[1] < this.size;
   };
 
+  MineSweeper.Board.prototype.isWon = function() {
+    var won = true;
+    for(var i = 0; i < this.size; i++) {
+      for(var j = 0; j < this.size; j++) {
+        if(this.tiles[i][j].mined && !this.tiles[i][j].flagged) {
+          won = false;
+        }
+      }
+    }
+
+    return won;
+  };
+
   MineSweeper.Board.prototype.render = function() {
     var domBoard = $l('.board');
     this.tiles.forEach(function(row) {
@@ -60,6 +73,11 @@
       }
     }
   };
+
+  MineSweeper.Board.prototype.winGame = function() {
+    $l('.board').empty();
+    $l('.board').html('<h2>You win!</h2>');
+  }
 
   MineSweeper.Tile = function(pos, board){
     this.inside = document.createElement('div');
@@ -101,7 +119,12 @@
       $l(tile.inside).addClass('orange');
       $l("div[x = '" + tile.x + "'][y = '"
         + tile.y + "'] .front").html("<h2>x</h2>");
+      tile.flagged = true;
+      if(tile.board.isWon()) {
+        tile.board.winGame();
+      }
     } else {
+      tile.flagged = false;
       $l(tile.inside).removeClass('orange');
       $l("div[x = '" + tile.x + "'][y = '"
         + tile.y + "'] .front").html("");

@@ -1,4 +1,4 @@
-function Promise(executor){
+function Promise(executor) {
   var resolve, reject;
   var resolvesArray = [];
   var rejectsArray = [];
@@ -94,59 +94,4 @@ function Promise(executor){
       }
     })
   }
-  //
-  // function fiveMachine(){
-  //   var value = 5;
-  //
-  //   return new Promise(function(resolve, reject){
-  //     setTimeout(function(){
-  //       resolve(value);
-  //
-  //     }, 1000);
-  //   });
-  //
-  // }
-  //
-  // function logCallback(value){
-  //   console.log('got ' + value);
-  // }
-  //
-  // function add37(value){
-  //   return new MyPromise(function(resolve, reject){
-  //     setTimeout(function(){
-  //       resolve(value + 37);
-  //     }, 1000);
-  //   });
-  // }
-  //
-  //
-  // module.exports = {
-  //   resolved: function(value){
-  //     return new Promise(function(resolve){
-  //       resolve(value);
-  //     });
-  //   },
-  //
-  //   rejected: function(value){
-  //     return new Promise(function(resolve, reject){
-  //       reject(value);
-  //     })
-  //   },
-  //
-  //   deferred: function () {
-  //     var resolve, reject;
-  //
-  //     return {
-  //       promise: new Promise(function (rslv, rjct) {
-  //         resolve = rslv;
-  //         reject = rjct;
-  //       }),
-  //       resolve: resolve,
-  //       reject: reject
-  //     };
-  //   }
-  // };
-
-  // fiveMachine().then(add37, logCallback).then(logCallback);
-
-  // MyPromise.all([fiveMachine(), fiveMachine().then(logCallback)]);
+  
