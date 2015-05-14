@@ -44,6 +44,8 @@
       for(var j = 0; j < this.size; j++) {
         if(this.tiles[i][j].mined && !this.tiles[i][j].flagged) {
           won = false;
+        } else if(this.tiles[i][j].flagged && !this.tiles[i][j].mined) {
+          won = false;
         }
       }
     }
