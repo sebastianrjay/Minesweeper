@@ -1,7 +1,7 @@
-Play it LIVE
+Play it [LIVE](http://sebastianrjay.github.io/Minesweeper)
 
 This is a JavaScript re-implementation of Microsoft's classic computer game,
-Minesweeper. Play it live at sebastianrjay.github.io/Minesweeper
+Minesweeper.
 
 Features:
 
