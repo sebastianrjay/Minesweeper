@@ -1,5 +1,8 @@
-.description {
+body {
   font-family: "Arial";
+}
+
+.description {
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
@@ -32,7 +35,7 @@
 }
 
 .clearfix:after {
-   content: " "; /* Older browser do not support empty content */
+   content: " ";  /*Older browser do not support empty content */
    visibility: hidden;
    display: block;
    height: 0px;
@@ -43,7 +46,9 @@
   cursor: pointer;
 }
 
-.tile{
+.tile {
+  height: 56px;
+  width: 56px;
   transition: 0.6s;
 	transform-style: preserve-3d;
   position: absolute;
@@ -61,7 +66,6 @@
 
 .front{
   background-color: gray;
-  z-index: 1;
   transform: rotateY(0deg);
 }
 
@@ -72,6 +76,7 @@
 .back{
   background-color: green;
   transform: rotateY(180deg);
+  z-index: 0;
 }
 
 .tile.orange .front {
@@ -85,7 +90,7 @@
 }
 
 .tile.flipped{
-  transform: rotateY(180deg) translate(-56px);
+  transform: rotateY(180deg);
   cursor: default;
 }
 
