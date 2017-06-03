@@ -2,6 +2,10 @@ body {
   font-family: "Arial";
 }
 
+a {
+  text-decoration: none;
+}
+
 .description {
   margin-left: auto;
   margin-right: auto;
